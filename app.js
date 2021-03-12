@@ -14,7 +14,6 @@ var indexRouter = require('./routes/index');
 var postsRouter = require('./routes/posts');
 const bodyParser = require('body-parser');
 
-var bodyParser = require('body-parser');
 var cors = require('cors');
 
 
