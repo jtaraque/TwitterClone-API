@@ -8,25 +8,23 @@ var Post = require('../models/Post.js');
 
 var db = mongoose.connection;
 
-
 /* GET posts listing ordered by publicationdate. */
 router.get('/', function (req, res) {
-    Post.find().sort('-publicationdate').exec(function(err, posts) { //Iría a la colección posts de la db, si no existe la creará.
+    Post.find().sort('-publicationdate').exec(function(err, posts) {
       if (err) res.status(500).send(err);
       else res.status(200).json(posts);
     });
 });
 
-
 /* GET all posts from an user by user Email */
 router.get('/all/:email', function (req, res) {
-    Post.find({'email':req.params.email}).sort('-publicationdate').exec(function (err, posts) {
-        if (err) res.status(500).send(err);
-        else res.status(200).json(posts);
-      });
-  });
+  Post.find({'email':req.params.email}).sort('-publicationdate').exec(function (err, posts) {
+      if (err) res.status(500).send(err);
+      else res.status(200).json(posts);
+    });
+});
 
-  /* POST a new post*/
+/* POST a new post*/
 router.post('/', function (req, res) {
   Post.create(req.body, function (err, postinfo) {
     if (err) res.status(500).send(err);
@@ -50,6 +48,4 @@ router.delete('/:id', function (req, res) {
   });
 });
 
-
-  
 module.exports = router;
